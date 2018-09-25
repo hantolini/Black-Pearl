@@ -20,7 +20,7 @@ HYPRIOT_DEVICE="Raspberry Pi"
 HYPRIOT_IMAGE_VERSION="v1.9.0"
 ```
 
-Basado en Hypriot - Docker en Raspberry Pi
+Basado en [Hypriot](https://blog.hypriot.com/) - Docker en Raspberry Pi
 
 ## Servicios que brinda
 
