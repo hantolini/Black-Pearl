@@ -1,8 +1,8 @@
-# Servicio [Sonarr](https://sonarr.tv)
+# Servicio [Deluge](https://deluge-torrent.org))
 
 Servicio para la busqueda de series de televisión en Torrent y USENet
 
-Repositorio [```lsioarmhf/sonarr```](https://hub.docker.com/r/lsioarmhf/sonarr)
+Repositorio [```lsioarmhf/deluge```](https://hub.docker.com/r/lsioarmhf/deluge)
 Arquitectura: ARMv6
 
 Compose File:
@@ -10,11 +10,11 @@ Compose File:
 ```yaml
 version: '3.7'
 services:
-  sonarr:
-    image: lsioarmhf/sonarr:latest
-    hostname: sonarr
+  deluge:
+    image: lsioarmhf/deluge:latest
+    hostname: deluge
     environment:
-      - TZ=America/Buneos_Aires
+      - TZ=America/Buenos_Aires
       - PUID=1000
       - PGID=1000
     deploy:
@@ -26,9 +26,8 @@ services:
     networks:
       - hostnet
     volumes:
-      - "/srv/services/sonarr/config:/config"
-      - "/srv/torrents/complete:/downloads"
-      - "/srv/tv:/tv"
+      - "/srv/services/deluge/config:/config"
+      - "/srv/torrents:/downloads"
 
 networks:
   hostnet:

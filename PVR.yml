@@ -1,0 +1,65 @@
+version: '3.7'
+services:
+  jackett:
+    image: lsioarmhf/jackett:latest
+    hostname: jackett
+    environment:
+      - TZ=America/Buenos_Aires
+      - PGID=1000
+      - PUID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=PVR]
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostnet
+    volumes:
+      - "/srv/services/jackett/config:/config"
+      - "/srv/torrents/watch:/downloads"
+
+  deluge:
+    image: lsioarmhf/deluge:latest
+    hostname: deluge
+    environment:
+      - TZ=America/Buenos_Aires
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=PVR]
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostnet
+    volumes:
+      - "/srv/services/deluge/config:/config"
+      - "/srv/torrents:/downloads"
+
+  sonarr:
+    image: lsioarmhf/sonarr:latest
+    hostname: sonarr
+    environment:
+      - TZ=America/Buneos_Aires
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=PVR]
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostnet
+    volumes:
+      - "/srv/services/sonarr/config:/config"
+      - "/srv/torrents/complete:/downloads"
+      - "/srv/tv:/tv"
+
+networks:
+  hostnet:
+    external: true
+    name: host
+
