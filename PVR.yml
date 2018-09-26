@@ -58,6 +58,26 @@ services:
       - "/srv/torrents/complete:/downloads"
       - "/srv/tv:/tv"
 
+  radarr:
+    image: lsioarmhf/radarr:latest
+    hostname: radarr
+    environment:
+      - TZ=America/Buenos_Aires
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=PVR]
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostnet
+    volumes:
+      - "/srv/services/radarr/config:/config"
+      - "/srv/torrents/complete:/donwloads"
+      - "/srv/movies:/movies"
+
 networks:
   hostnet:
     external: true
