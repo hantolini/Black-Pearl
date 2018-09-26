@@ -75,7 +75,7 @@ services:
       - hostnet
     volumes:
       - "/srv/services/radarr/config:/config"
-      - "/srv/torrents/complete:/donwloads"
+      - "/srv/torrents/complete:/downloads"
       - "/srv/movies:/movies"
 
 networks:
