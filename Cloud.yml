@@ -1,0 +1,26 @@
+version: '3.5'
+servies:
+  nextcloud:
+    image: lsioarmhf/nextcloud:latest
+    hostname: nextcloud
+    environment:
+      - TZ=America/Buenos_Aires
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=Cloud]
+      restart_policy:
+        condition: on-failure
+    networks:
+      - backend
+    ports:
+      - "443:443"
+    volumes:
+      - "/srv/services/nextcloud/config:/config"
+      - "/srv/nextcloud:/data"
+
+networks:
+  backend:
+    external: true
